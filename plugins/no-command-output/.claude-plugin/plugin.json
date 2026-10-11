@@ -5,8 +5,8 @@
   "author": {
     "name": "Marcos Cano"
   },
-  "homepage": "https://github.com/marcoscano/no-command-output",
-  "repository": "https://github.com/marcoscano/no-command-output",
+  "homepage": "https://github.com/marcoscano/claude-plugins/tree/main/plugins/no-command-output",
+  "repository": "https://github.com/marcoscano/claude-plugins",
   "license": "MIT",
   "types": "./types/index.d.ts",
   "userConfig": {

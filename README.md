@@ -1,98 +1,76 @@
-# no-command-output
+# claude-plugins
 
-A Claude Code plugin that hides tool output in the transcript, so you see which
-commands ran and which files were touched without the noise of their results.
-Toggle it with `/no-command-output`.
+My [Claude Code](https://claude.com/claude-code) plugins, published as one
+marketplace. Each one is a standalone plugin under `plugins/`: install only
+what you need.
 
-<img src="docs/no-command-output-screenshot.png" alt="Screenshot of a Claude Code session explaining how no-command-output behaves" width="820">
-
-
-- Every finished tool row shows a one-line placeholder, `output hidden (12 lines)`,
-  instead of its output. The command or file in the row's header still shows.
-- Click the placeholder to expand that row in place, exactly as Claude Code
-  draws it; click `hide output` under it to fold it again. Clicks reach rows in
-  the fullscreen renderer (`/tui fullscreen`), where the transcript stays live;
-  the default renderer prints finished rows to scrollback, where nothing is
-  clickable.
-- Failed, interrupted and still-running calls are left alone: the error is what
-  you want to read.
-- Works in the default and fullscreen (`/tui`) renderers, with and without
-  `verbose`, on the terminal and in the desktop app.
-- Output is hidden from the start of every session. Change that under
-  `/config` → "Hide tool output by default".
-- The status line reads `tool output hidden` while the mode is on.
+| Plugin | Type | What it does |
+| --- | --- | --- |
+| [no-command-output](plugins/no-command-output) | mod | Hides tool output in the transcript, so you see what ran without the noise of its results. `/no-command-output` toggles it. |
+| [agents-inspector](plugins/agents-inspector) | mod | A pane listing the session's subagents: model, effort, context, tokens, steps and time. `/agents-inspector` toggles it. |
 
 ## Install
 
-From the prompt of a terminal session:
+From the prompt of a terminal session, add the marketplace once, then install
+what you want:
 
 ```
-/plugin install no-command-output --marketplace marcoscano/no-command-output
+/plugin marketplace add marcoscano/claude-plugins
+/plugin install no-command-output@marcoscano
+/plugin install agents-inspector@marcoscano
 ```
 
-Answer `y` to add the marketplace, pick the user scope, and accept or change the
-one option. The plugin is active in that session and in every session after.
+Pick the user scope to have a plugin in every session, the desktop app
+included. Updates come through `/plugin` like any marketplace plugin.
 
-## Usage
+### By hand
 
-| Command | Effect |
-| --- | --- |
-| `/no-command-output` | Toggle for the current session |
-| `/no-command-output on` (or `hide`) | Hide output |
-| `/no-command-output off` (or `show`) | Show output |
+To run a plugin from a checkout instead, for one session:
 
-The session's toggle wins over the `/config` default until the session ends.
-A row you expanded stays expanded for the session, whatever the mode.
-
-## How it works
-
-The plugin is a hooks module (`hooks/register.tsx`) with two `ui.render` hooks:
-
-- `ToolResult`, the result block under a standalone row, is replaced by the
-  placeholder for any tool.
-- `ToolUse`, the row itself, draws its result inline in expanded groups and in
-  the fullscreen renderer. While folded, the plugin draws the row (`⏺ Read(path)`
-  and the placeholder, a plain dim `Button`). Once expanded it nests the
-  engine's own drawing of the row (`next(e)`, header and full output) under a
-  `hide output` button, so an expanded row looks exactly as it does without the
-  plugin.
-- `ToolResult` stays empty while its row drew the placeholder, which keeps a
-  standalone row in the default renderer from showing it twice.
-
-The mode lives in `$.state` for the session, and each expanded row in a
-`StateFamily` keyed by the call's id; the manifest's `hiddenByDefault` option
-(`.claude-plugin/plugin.json`) applies until the session toggles it.
-
-## Development
-
-Clone the repository and run Claude Code against the checkout:
-
-```
-claude --plugin-dir /path/to/no-command-output
+```bash
+git clone https://github.com/marcoscano/claude-plugins.git ~/claude-plugins
+claude --plugin-dir ~/claude-plugins/plugins/agents-inspector
 ```
 
-Or link it under `~/.claude/skills/no-command-output`: a plugin folder there
-loads in every interactive session, and a save reloads it in place.
+or for every session through `env` in `~/.claude/settings.json`, several
+folders separated with `:`:
 
-Check and test it against the engine:
+```json
+{
+  "env": {
+    "CLAUDE_CODE_PLUGIN_DIRS": "~/claude-plugins/plugins/agents-inspector:~/claude-plugins/plugins/no-command-output"
+  }
+}
+```
+
+An interactive session watches a folder loaded this way and reloads the plugin
+when a file is saved.
+
+## Layout
 
 ```
-claude plugin validate .
-claude plugin test .
+.claude-plugin/marketplace.json   the catalog `/plugin marketplace add` reads
+plugins/<name>/
+  .claude-plugin/plugin.json      manifest
+  hooks/hooks.json                a mod: points at the hooks module
+  hooks/register.tsx              a mod: the module itself
+  types/index.d.ts                a mod: its $.state contract
+  tests/*.test.tsx                run with `claude plugin test`
+  README.md                       what it does, how it works
 ```
 
-Once the plugin has loaded in a session, Claude Code writes its API types to
-`.claude-plugin/types/` (ignored by git), and `tsc -p .` type-checks the module.
+The mods are function-hook plugins (`hooks/register.tsx`), an early-access
+Claude Code API that may change between releases; each README names the
+version it was last tested with.
 
-Notes for changes:
+## Adding a plugin
 
-- Reach `$.state` directly (`$.state.get`, `$.state.set`); never pass `$` to an
-  imported helper, which some builds' module loader refuses.
-- Declare every `$.state` key in `types/index.d.ts`; `claude plugin validate`
-  holds the module to that contract.
-- Add or adjust a test in `tests/` for the behaviour you change.
-
-Tested with Claude Code 2.1.292.
+1. Create `plugins/<name>/` with its manifest and files.
+2. Add an entry to `.claude-plugin/marketplace.json` with the same `name`,
+   `source: "./plugins/<name>"` and its `version`.
+3. Check both: `claude plugin validate plugins/<name>` and
+   `claude plugin validate .` for the catalog; `claude plugin test
+   plugins/<name>` runs its tests.
 
 ## License
 

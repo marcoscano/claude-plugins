@@ -1,14 +1,26 @@
 {
   "name": "marcoscano",
   "owner": {
-    "name": "Marcos Cano"
+    "name": "Marcos Cano",
+    "url": "https://github.com/marcoscano"
   },
-  "description": "Marcos Cano's Claude Code plugins",
+  "metadata": {
+    "description": "Marcos Cano's Claude Code plugins."
+  },
   "plugins": [
     {
       "name": "no-command-output",
-      "source": "./",
-      "description": "Hide tool output in the Claude Code transcript, toggled with /no-command-output"
+      "source": "./plugins/no-command-output",
+      "description": "Mod: hide tool output in the transcript, toggled with /no-command-output.",
+      "version": "0.3.0",
+      "category": "mod"
+    },
+    {
+      "name": "agents-inspector",
+      "source": "./plugins/agents-inspector",
+      "description": "Mod: a pane listing the session's subagents with model, context, tokens, steps and time; /agents-inspector toggles it.",
+      "version": "0.1.0",
+      "category": "mod"
     }
   ]
 }

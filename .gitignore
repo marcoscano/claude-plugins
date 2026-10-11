@@ -1,3 +1,4 @@
-# Written by Claude Code when it loads the plugin: the engine's API types for
+.DS_Store
+# Written by Claude Code when it loads a plugin: the engine's API types for
 # the editor and tsc. Regenerated on every load, never committed.
-.claude-plugin/types/
+**/.claude-plugin/types/

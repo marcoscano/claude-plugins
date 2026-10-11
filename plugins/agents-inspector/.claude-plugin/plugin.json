@@ -1,0 +1,20 @@
+{
+  "name": "agents-inspector",
+  "version": "0.1.0",
+  "description": "A pane listing this session's subagents: type, model, effort, context, tokens, steps and time. /agents-inspector toggles it.",
+  "author": {
+    "name": "Marcos Cano"
+  },
+  "homepage": "https://github.com/marcoscano/claude-plugins/tree/main/plugins/agents-inspector",
+  "repository": "https://github.com/marcoscano/claude-plugins",
+  "license": "MIT",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "autoOpen": {
+      "type": "boolean",
+      "title": "Open the agents pane when the first subagent starts",
+      "description": "Once per session; a pane you close stays closed until /agents-inspector",
+      "default": true
+    }
+  }
+}
