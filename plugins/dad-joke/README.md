@@ -6,8 +6,8 @@ every minute. Between turns there is no joke.
 
 ```
 · Hullaballooing… (2m 41s · ↓ 3.8k tokens · deep in thought)   │ I'm reading a book about
-                                                                 │ anti-gravity. It's impossible
-                                                                 │ to put down.
+                                                               │ anti-gravity. It's impossible
+                                                               │ to put down.
 ```
 
 <img src="docs/dad_joke.png" alt="Screenshot of a Claude Code session explaining how dad-joke behaves" width="820">
