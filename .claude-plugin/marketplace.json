@@ -21,6 +21,13 @@
       "description": "Mod: a pane listing the session's subagents with model, context, tokens, steps and time; /agents-inspector toggles it.",
       "version": "0.1.0",
       "category": "mod"
+    },
+    {
+      "name": "dad-joke",
+      "source": "./plugins/dad-joke",
+      "description": "Mod: a dad joke beside the spinner while Claude works, a new one every minute; /dad-joke toggles it, /dad-joke-now tells one, /dad-joke-add-joke stores one, /dad-joke-more-jokes grows the collection.",
+      "version": "0.1.0",
+      "category": "mod"
     }
   ]
 }

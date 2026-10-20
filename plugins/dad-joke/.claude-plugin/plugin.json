@@ -1,0 +1,31 @@
+{
+  "name": "dad-joke",
+  "version": "0.1.0",
+  "description": "A dad joke beside the spinner while Claude works, a new one every minute. /dad-joke toggles it, /dad-joke-now tells one, /dad-joke-add-joke stores one, /dad-joke-more-jokes grows the collection.",
+  "author": {
+    "name": "Marcos Cano"
+  },
+  "homepage": "https://github.com/marcoscano/claude-plugins/tree/main/plugins/dad-joke",
+  "repository": "https://github.com/marcoscano/claude-plugins",
+  "license": "MIT",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "language": {
+      "type": "string",
+      "title": "Dad joke language",
+      "description": "Which jokes to tell: all, en (English) or es (Spanish)",
+      "options": [
+        "all",
+        "en",
+        "es"
+      ],
+      "default": "all"
+    },
+    "enabledByDefault": {
+      "type": "boolean",
+      "title": "Show a dad joke beside the spinner",
+      "description": "Start every session with the joke panel on; /dad-joke on|off changes it for a session",
+      "default": true
+    }
+  }
+}

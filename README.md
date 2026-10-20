@@ -8,6 +8,7 @@ what you need.
 | --- | --- | --- |
 | [no-command-output](plugins/no-command-output) | mod | Hides tool output in the transcript, so you see what ran without the noise of its results. `/no-command-output` toggles it. |
 | [agents-inspector](plugins/agents-inspector) | mod | A pane listing the session's subagents: model, effort, context, tokens, steps and time. `/agents-inspector` toggles it. |
+| [dad-joke](plugins/dad-joke) | mod | A dad joke beside the spinner while Claude works, a new one every minute. `/dad-joke` toggles it, `/dad-joke-now` tells one, `/dad-joke-add-joke` stores one, `/dad-joke-more-jokes` has Claude search the web for 50 more. |
 
 ## Install
 
@@ -18,6 +19,7 @@ what you want:
 /plugin marketplace add marcoscano/claude-plugins
 /plugin install no-command-output@marcoscano
 /plugin install agents-inspector@marcoscano
+/plugin install dad-joke@marcoscano
 ```
 
 Pick the user scope to have a plugin in every session, the desktop app
