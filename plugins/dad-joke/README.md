@@ -10,6 +10,8 @@ every minute. Between turns there is no joke.
                                                                  │ to put down.
 ```
 
+<img src="docs/dad_joke.png" alt="Screenshot of a Claude Code session explaining how dad-joke behaves" width="820">
+
 - The left side is exactly what Claude Code draws without the mod (the
   animated word, elapsed time, tokens, effort); the mod only adds the right
   column. On a terminal narrower than 90 columns the joke goes under the line
