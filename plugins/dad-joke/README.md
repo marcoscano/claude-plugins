@@ -5,9 +5,8 @@ engine's own line on the left and a dad joke on the right. The joke changes
 every minute. Between turns there is no joke.
 
 ```
-· Hullaballooing… (2m 41s · ↓ 3.8k tokens · deep in thought)   │ I'm reading a book about
-                                                               │ anti-gravity. It's impossible
-                                                               │ to put down.
+· Hullaballooing… (2m 41s · ↓ 3.8k tokens · deep in thought)   │ Where do pears go on vacation?
+                                                               │ Pear-is.
 ```
 
 <img src="docs/dad_joke.png" alt="Screenshot of a Claude Code session explaining how dad-joke behaves" width="820">
@@ -17,7 +16,7 @@ every minute. Between turns there is no joke.
   column. On a terminal narrower than 90 columns the joke goes under the line
   instead.
 - Jokes come from the plugin's own `jokes/dad_jokes.json`, one list per
-  language (`en`, `es`). It ships with 115 English and 122 Spanish jokes.
+  language (`en`, `es`). It ships with 220 English and 221 Spanish jokes.
 - `/dad-joke-now` tells one right away, mid-turn or idle. `/dad-joke off`
   hides the panel for the session, `/dad-joke on` brings it back.
 - `/dad-joke-add-joke <joke>` stores one you came across, in the language it
